@@ -39,7 +39,7 @@ const PICKUP_POINTS = {
 };
 
 export default function Cart() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { cart, removeFromCart, clearCart, updateCartQuantity, addOrder, user } = useStore();
   const [promo, setPromo] = useState('');
   const [discount, setDiscount] = useState(0);
@@ -78,7 +78,7 @@ export default function Cart() {
     const pickupInfo = selectedPoint ? `${selectedCity} — ${selectedPoint.name}, ${selectedPoint.address}` : '';
     let orderText = `🛒 <b>Новый заказ!</b>\n\n`;
     cart.forEach((item, i) => {
-      orderText += `${i + 1}. ${item.name} — ${item.qty} шт. × ${item.price.toLocaleString()} UZS\n`;
+      orderText += `${i + 1}. ${item.name['ru'] || item.name} — ${item.qty} шт. × ${item.price.toLocaleString()} UZS\n`;
     });
     orderText += `\n<b>Оплата:</b> ${paymentMethod === 'card' ? '💳 Карта' : '💵 Наличные'}\n`;
     orderText += `<b>Доставка:</b> ${deliveryMethod === 'delivery' ? '🚚 До двери (+30 000 UZS)' : `📦 Пункт выдачи — ${pickupInfo}`}\n`;
@@ -119,9 +119,9 @@ export default function Cart() {
         <div className="flex-1 space-y-4">
           {cart.map(item => (
             <div key={item.id} className="flex flex-col sm:flex-row items-center gap-4 bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700/50">
-              <img src={item.image} alt={item.name} className="w-24 h-24 object-cover rounded-xl" />
+              <img src={item.image} alt={item.name.ru} className="w-24 h-24 object-cover rounded-xl" />
               <div className="flex-1 text-center sm:text-left">
-                <h3 className="font-bold text-lg text-gray-900 dark:text-white line-clamp-2">{item.name}</h3>
+                <h3 className="font-bold text-lg text-gray-900 dark:text-white line-clamp-2">{item.name[i18n.language] || item.name['ru']}</h3>
                 <div className="flex items-center gap-2 mt-1 justify-center sm:justify-start">
                   <p className="text-indigo-500 font-bold">{item.price.toLocaleString()} UZS</p>
                   {item.discount && (

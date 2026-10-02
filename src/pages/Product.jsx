@@ -1,11 +1,13 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useStore } from '../store';
 import { ShoppingCart, Heart, ArrowLeft, Star, Truck, ShieldCheck, Zap } from 'lucide-react';
 
 export default function Product() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
   const { products, addToCart, cart, toggleFavorite, favorites, reviews } = useStore();
   
   const product = products.find(p => String(p.id) === String(id));
@@ -43,7 +45,7 @@ export default function Product() {
           
           {/* Image */}
           <div className="relative rounded-2xl overflow-hidden bg-gray-50 dark:bg-gray-900 flex items-center justify-center min-h-[400px]">
-            <img src={product.image} alt={product.name} className="max-w-full max-h-[500px] object-contain rounded-2xl mix-blend-multiply dark:mix-blend-normal" />
+            <img src={product.image} alt={product.name.ru} className="max-w-full max-h-[500px] object-contain rounded-2xl mix-blend-multiply dark:mix-blend-normal" />
             <button 
               onClick={(e) => { e.preventDefault(); toggleFavorite(product); }}
               className={`absolute top-4 right-4 p-3 rounded-full backdrop-blur-md shadow-lg transition-all hover:scale-110 active:scale-95 ${isFavorite ? 'bg-red-50 dark:bg-red-900/30 text-red-500' : 'bg-white/80 dark:bg-gray-800/80 text-gray-400 hover:text-red-500'}`}
@@ -59,7 +61,7 @@ export default function Product() {
                 <span className="px-3 py-1 bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400 rounded-lg text-xs font-bold uppercase tracking-wider">{product.category}</span>
                 <span className="px-3 py-1 bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300 rounded-lg text-xs font-bold uppercase tracking-wider">{product.brand}</span>
               </div>
-              <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white mb-2">{product.name}</h1>
+              <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white mb-2">{product.name[i18n.language] || product.name['ru']}</h1>
               <div className="flex items-center gap-4 text-sm">
                 <div className="flex items-center gap-1 text-yellow-500 font-bold">
                   <Star size={16} fill="currentColor" />
@@ -76,7 +78,7 @@ export default function Product() {
               </div>
             </div>
 
-            <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">{product.desc}</p>
+            <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">{product.desc[i18n.language] || product.desc['ru']}</p>
 
             <div className="text-4xl font-black text-indigo-600 dark:text-indigo-400">
               {product.price.toLocaleString()} UZS

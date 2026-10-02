@@ -38,7 +38,7 @@ const menuItems = [
 ];
 
 export default function Admin() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { user, setUser, products, setProducts, shopName, setShopName, orders, reviews, updateOrderStatus } = useStore();
   const navigate = useNavigate();
   
@@ -80,7 +80,7 @@ export default function Admin() {
   const handleEdit = (p) => {
     setEditingId(p.id);
     setForm({
-      name: p.name || '',
+      name: typeof p.name === 'object' ? (p.name.ru || p.name[i18n.language]) : (p.name || ''),
       brand: p.brand || 'Nike',
       price: p.price || '',
       category: p.category || 'Кроссовки',
@@ -402,7 +402,7 @@ export default function Admin() {
                     <img src={p.image} className="w-24 h-24 object-cover rounded-2xl bg-gray-100 dark:bg-gray-900" alt={p.name} />
                     <div className="flex-1 min-w-0">
                       <div className="flex justify-between items-start mb-1">
-                        <h3 className="font-bold text-lg text-gray-900 dark:text-white leading-tight truncate">{p.name}</h3>
+                        <h3 className="font-bold text-lg text-gray-900 dark:text-white leading-tight truncate">{typeof p.name === 'object' ? p.name[i18n.language] || p.name.ru : p.name}</h3>
                         <span className="font-bold text-indigo-600 dark:text-indigo-400 whitespace-nowrap bg-indigo-50 dark:bg-indigo-900/30 px-2 py-1 rounded-lg text-sm">{p.price.toLocaleString()} UZS</span>
                       </div>
                       <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
@@ -528,7 +528,7 @@ export default function Admin() {
                               {(order.cart || []).map((item, idx) => (
                                 <li key={idx} className="flex justify-between items-start text-xs border-b border-gray-200 dark:border-gray-700 pb-1 last:border-0 last:pb-0">
                                   <div className="flex-1 pr-2">
-                                    <span className="font-semibold text-gray-800 dark:text-gray-200">{item.name}</span>
+                                    <span className="font-semibold text-gray-800 dark:text-gray-200">{typeof item.name === 'object' ? item.name[i18n.language] || item.name.ru : item.name}</span>
                                     {item.discount && <span className="ml-1 text-red-500">(-{item.discount}%)</span>}
                                   </div>
                                   <div className="whitespace-nowrap font-medium">
@@ -651,7 +651,7 @@ export default function Admin() {
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
                           <img src={p.image} className="w-10 h-10 rounded-xl object-cover bg-gray-100" alt="" />
-                          <span className="font-semibold truncate max-w-[180px]">{p.name}</span>
+                          <span className="font-semibold truncate max-w-[180px]">{typeof p.name === 'object' ? p.name[i18n.language] || p.name.ru : p.name}</span>
                         </div>
                       </td>
                       <td className="px-6 py-4 text-gray-500">{p.category}</td>

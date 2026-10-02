@@ -4,7 +4,7 @@ import { useStore } from '../store';
 import { useNavigate } from 'react-router-dom';
 
 export default function ProductCard({ product }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const { addToCart, toggleFavorite, favorites, reviews } = useStore();
   
@@ -33,9 +33,9 @@ export default function ProductCard({ product }) {
         <div className="flex justify-between items-start mb-2 gap-2">
           <h3 
             className="font-bold text-lg leading-tight line-clamp-2 text-gray-900 dark:text-white group-hover:text-indigo-500 transition-colors"
-            title={product.name}
+            title={product.name[i18n.language] || product.name['ru']}
           >
-            {product.name}
+            {product.name[i18n.language] || product.name['ru']}
           </h3>
           <span className="font-bold text-indigo-500 whitespace-nowrap bg-indigo-50 dark:bg-indigo-900/30 px-2 py-1 rounded-lg">
             {product.price.toLocaleString()} UZS
@@ -47,7 +47,7 @@ export default function ProductCard({ product }) {
             <span className="text-gray-600 dark:text-gray-400 font-medium">{averageRating} ({productReviews.length})</span>
           </div>
         )}
-        <p className="text-gray-500 dark:text-gray-400 text-sm mb-4 line-clamp-2 flex-grow">{product.desc}</p>
+        <p className="text-gray-500 dark:text-gray-400 text-sm mb-4 line-clamp-2 flex-grow">{product.desc[i18n.language] || product.desc['ru']}</p>
         <button 
           onClick={(e) => { e.stopPropagation(); addToCart(product); }}
           className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-indigo-500/30 active:scale-95 group/btn mt-auto"
