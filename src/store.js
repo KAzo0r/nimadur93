@@ -112,7 +112,7 @@ const initialProducts = [
     price: 4200000, category: "Транспорт", brand: "Segway", image: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=800&q=80", sizes: "", colors: "Белый", stock: 10 }
 ];
 
-const CATALOG_VERSION = 'marketplace_v3';
+const CATALOG_VERSION = 'marketplace_v4';
 
 export const useStore = create((set) => ({
   products: (() => {
