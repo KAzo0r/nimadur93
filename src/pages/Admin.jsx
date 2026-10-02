@@ -88,7 +88,7 @@ export default function Admin() {
       colors: p.colors || '',
       stock: p.stock || '',
       image: p.image || '',
-      desc: p.desc || ''
+      desc: typeof p.desc === 'object' ? (p.desc.ru || p.desc[i18n.language]) : (p.desc || '')
     });
   };
 
@@ -742,7 +742,7 @@ export default function Admin() {
                   <div className="flex items-center gap-4">
                     <div className="px-4 py-2 bg-indigo-50 dark:bg-indigo-900/30 rounded-2xl border-2 border-dashed border-indigo-300 dark:border-indigo-700 font-bold text-indigo-600 dark:text-indigo-400 text-lg tracking-widest">{p.code}</div>
                     <div>
-                      <p className="font-semibold text-gray-900 dark:text-white">{p.desc}</p>
+                      <p className="font-semibold text-gray-900 dark:text-white">{typeof p.desc === 'object' ? p.desc[i18n.language] || p.desc.ru : p.desc}</p>
                       <p className="text-sm text-gray-500">Использован {p.uses} раз</p>
                     </div>
                   </div>

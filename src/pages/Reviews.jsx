@@ -4,7 +4,7 @@ import { Star, Send, MessageSquare, ThumbsUp } from 'lucide-react';
 import { useStore } from '../store';
 
 export default function Reviews() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { reviews, addReview, user, products } = useStore();
 
   const [form, setForm] = useState({ productId: '', text: '', rating: 5 });
@@ -91,7 +91,7 @@ export default function Reviews() {
                 >
                   <option value="">— Общий отзыв о магазине —</option>
                   {products.map(p => (
-                    <option key={p.id} value={p.id}>{p.name}</option>
+                    <option key={p.id} value={p.id}>{typeof p.name === 'object' ? p.name[i18n.language] || p.name.ru : p.name}</option>
                   ))}
                 </select>
               </div>

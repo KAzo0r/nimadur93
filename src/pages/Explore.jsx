@@ -118,13 +118,13 @@ export default function Explore() {
             return (
               <div key={p.id} onClick={() => navigate(`/product/${p.id}`)} className="bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 group cursor-pointer">
                 <div className="relative h-40 overflow-hidden">
-                  <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                  <img src={p.image} alt={typeof p.name === 'object' ? p.name.ru : p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                   <div className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-lg flex items-center gap-1">
                     <Percent size={10} /> -{d}%
                   </div>
                 </div>
                 <div className="p-4">
-                  <p className="font-semibold text-gray-900 dark:text-white text-sm line-clamp-2 mb-2">{p.name}</p>
+                  <p className="font-semibold text-gray-900 dark:text-white text-sm line-clamp-2 mb-2">{typeof p.name === 'object' ? p.name[i18n.language] || p.name.ru : p.name}</p>
                   <div className="flex items-center gap-2">
                     <span className="font-black text-indigo-600 dark:text-indigo-400">{p.price.toLocaleString()} UZS</span>
                   </div>
