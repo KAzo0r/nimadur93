@@ -21,13 +21,14 @@ export default function Navbar() {
         <div className="flex justify-between h-16 items-center">
           <Link to="/" className="flex items-center gap-2 text-xl font-bold text-primary dark:text-primary-dark shrink-0">
             <Rocket className="h-8 w-8 text-indigo-500" />
-            <span className="hidden lg:block text-gray-900 dark:text-white">{t('space_shop')}</span>
+            <span className="hidden lg:block text-gray-900 dark:text-white">{useStore().shopName || t('space_shop')}</span>
           </Link>
           
           <div className="flex items-center gap-4 sm:gap-6 ml-auto">
             <div className="hidden md:flex items-center gap-4 text-sm font-medium">
               <Link to="/catalog" className="text-gray-700 dark:text-gray-300 hover:text-indigo-500 transition-colors">{t('catalog')}</Link>
               <Link to="/explore" className="text-gray-700 dark:text-gray-300 hover:text-indigo-500 transition-colors">{t('explore')}</Link>
+              <Link to="/cosmos" className="text-indigo-600 dark:text-indigo-400 font-bold hover:text-indigo-800 transition-colors flex items-center gap-1"><Rocket size={16}/>Космос</Link>
               <Link to="/about" className="text-gray-700 dark:text-gray-300 hover:text-indigo-500 transition-colors">{t('about')}</Link>
               <Link to="/reviews" className="text-gray-700 dark:text-gray-300 hover:text-indigo-500 transition-colors">{t('reviews')}</Link>
               <Link to="/help" className="text-gray-700 dark:text-gray-300 hover:text-indigo-500 transition-colors">{t('help')}</Link>

@@ -35,10 +35,6 @@ export default function Help() {
           <p className="text-gray-600 dark:text-gray-400">{t('help_a2')}</p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700/50">
-          <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">{t('help_q3')}</h3>
-          <p className="text-gray-600 dark:text-gray-400">{t('help_a3')}</p>
-        </div>
       </div>
       
       <div className="bg-indigo-600 text-white p-8 rounded-3xl text-center shadow-lg">

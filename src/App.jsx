@@ -13,6 +13,8 @@ import Help from './pages/Help';
 import About from './pages/About';
 import Reviews from './pages/Reviews';
 import Profile from './pages/Profile';
+import Product from './pages/Product';
+import Cosmos from './pages/Cosmos';
 import { useStore } from './store';
 
 function App() {
@@ -43,6 +45,8 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/reviews" element={<Reviews />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/product/:id" element={<Product />} />
+            <Route path="/cosmos" element={<Cosmos />} />
           </Routes>
         </main>
         <Footer />
