@@ -455,14 +455,6 @@ export default function Admin() {
                     className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all text-gray-900 dark:text-white"
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Валюта</label>
-                  <select className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all text-gray-900 dark:text-white">
-                    <option>UZS (Сум)</option>
-                    <option>USD (Доллар)</option>
-                    <option>RUB (Рубль)</option>
-                  </select>
-                </div>
               </div>
             </div>
           </div>
