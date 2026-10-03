@@ -331,7 +331,7 @@ export default function Admin() {
 
         {activeTab === 'products' && (
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 animate-slide-up">
-            <div className="xl:col-span-1 bg-white dark:bg-gray-800 p-6 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700/50 h-fit sticky top-24">
+            <div className="xl:col-span-1 bg-white dark:bg-gray-800 p-6 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700/50 h-fit sticky top-24 max-h-[85vh] overflow-y-auto custom-scrollbar">
               <h2 className="text-xl font-bold mb-6 text-gray-900 dark:text-white">{editingId ? 'Редактировать модель' : 'Добавить кроссовки'}</h2>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
