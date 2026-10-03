@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useStore } from '../store';
 import { useNavigate } from 'react-router-dom';
+import { formatPrice } from '../utils/currency';
 import { Plus, Edit2, Trash2, LogOut, BarChart2, Package, Users, User, Settings, Bell, Search, ShoppingCart, Archive, Tags, CreditCard, Ticket, Star, Truck, Heart, Shield, AlertTriangle } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
 
@@ -180,9 +181,9 @@ export default function Admin() {
             {/* 6 Stat Cards */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               {[
-                { title: 'Продажи сегодня', value: `${salesToday.toLocaleString()} UZS`, trend: '+0%', color: 'text-gray-500' },
+                { title: 'Продажи сегодня', value: formatPrice(salesToday, i18n.language), trend: '+0%', color: 'text-gray-500' },
                 { title: 'Заказы', value: totalOrders.toString(), trend: '+0', color: 'text-gray-500' },
-                { title: 'Выручка (всего)', value: `${totalRevenue.toLocaleString()} UZS`, trend: '+0%', color: 'text-gray-500' },
+                { title: 'Выручка (всего)', value: formatPrice(totalRevenue, i18n.language), trend: '+0%', color: 'text-gray-500' },
                 { title: 'На складе', value: `${totalStock} шт`, trend: '+0', color: 'text-gray-500' },
                 { title: 'Клиенты', value: '1', trend: '+1', color: 'text-blue-500' },
                 { title: 'Возвраты', value: '0', trend: '0', color: 'text-gray-500' },
@@ -236,7 +237,7 @@ export default function Admin() {
                             <tr key={order.id}>
                               <td className="py-3 font-medium">#{String(order.id || '').slice(-4)}</td>
                               <td className="py-3">{order.userName}</td>
-                              <td className="py-3">{order.total.toLocaleString()} UZS</td>
+                              <td className="py-3">{formatPrice(order.total, i18n.language)}</td>
                               <td className="py-3">
                                 <span className="px-2 py-1 bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-500 rounded-md text-xs font-medium">
                                   {order.status}
@@ -415,7 +416,7 @@ export default function Admin() {
                     <div className="flex-1 min-w-0">
                       <div className="flex justify-between items-start mb-1">
                         <h3 className="font-bold text-lg text-gray-900 dark:text-white leading-tight truncate">{typeof p.name === 'object' ? p.name[i18n.language] || p.name.ru : p.name}</h3>
-                        <span className="font-bold text-indigo-600 dark:text-indigo-400 whitespace-nowrap bg-indigo-50 dark:bg-indigo-900/30 px-2 py-1 rounded-lg text-sm">{p.price.toLocaleString()} UZS</span>
+                        <span className="font-bold text-indigo-600 dark:text-indigo-400 whitespace-nowrap bg-indigo-50 dark:bg-indigo-900/30 px-2 py-1 rounded-lg text-sm">{formatPrice(p.price, i18n.language)}</span>
                       </div>
                       <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
                         {p.brand} <span className="px-1">•</span> {p.category}
@@ -522,7 +523,7 @@ export default function Admin() {
                           <span className="text-xs text-gray-400">{new Date(order.date).toLocaleDateString('ru-RU', { day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit' })}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className="font-bold text-gray-900 dark:text-white">{order.total?.toLocaleString()} UZS</span>
+                          <span className="font-bold text-gray-900 dark:text-white">{formatPrice(order.total || 0, i18n.language)}</span>
                           <span className={`px-2 py-1 rounded-lg text-xs font-bold ${statusStyles[order.status] || 'bg-gray-100 text-gray-600'}`}>{order.status}</span>
                         </div>
                       </div>
@@ -630,7 +631,7 @@ export default function Admin() {
                       </td>
                       <td className="px-6 py-4 text-gray-500">{c.email}</td>
                       <td className="px-6 py-4">{c.orders}</td>
-                      <td className="px-6 py-4 font-medium">{c.spent} UZS</td>
+                      <td className="px-6 py-4 font-medium">{formatPrice(c.spent, i18n.language)}</td>
                       <td className="px-6 py-4">
                         <span className={`px-2 py-1 rounded-lg text-xs font-semibold ${c.status==='VIP'?'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400':c.status==='Активный'?'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400':'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400'}`}>{c.status}</span>
                       </td>
@@ -667,7 +668,7 @@ export default function Admin() {
                         </div>
                       </td>
                       <td className="px-6 py-4 text-gray-500">{p.category}</td>
-                      <td className="px-6 py-4 font-medium text-indigo-600 dark:text-indigo-400">{p.price?.toLocaleString()} UZS</td>
+                      <td className="px-6 py-4 font-medium text-indigo-600 dark:text-indigo-400">{formatPrice(p.price || 0, i18n.language)}</td>
                       <td className="px-6 py-4 font-bold">{p.stock || 0} шт.</td>
                       <td className="px-6 py-4">
                         <span className={`px-2 py-1 rounded-lg text-xs font-semibold ${!p.stock||p.stock===0?'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400':Number(p.stock)<5?'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400':'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'}`}>
@@ -708,9 +709,9 @@ export default function Admin() {
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Платежи</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {[
-                {label:'Выручка всего',val:`${(orders?.reduce((a,o)=>a+(o.total||0),0)||0).toLocaleString()} UZS`,icon:'💰',color:'text-green-500'},
-                {label:'Картой',val:`${(orders?.filter(o=>o.paymentMethod==='card').reduce((a,o)=>a+(o.total||0),0)||0).toLocaleString()} UZS`,icon:'💳',color:'text-blue-500'},
-                {label:'Наличными',val:`${(orders?.filter(o=>o.paymentMethod==='cash').reduce((a,o)=>a+(o.total||0),0)||0).toLocaleString()} UZS`,icon:'💵',color:'text-orange-500'},
+                {label:'Выручка всего',val:formatPrice(orders?.reduce((a,o)=>a+(o.total||0),0)||0, i18n.language),icon:'💰',color:'text-green-500'},
+                {label:'Картой',val:formatPrice(orders?.filter(o=>o.paymentMethod==='card').reduce((a,o)=>a+(o.total||0),0)||0, i18n.language),icon:'💳',color:'text-blue-500'},
+                {label:'Наличными',val:formatPrice(orders?.filter(o=>o.paymentMethod==='cash').reduce((a,o)=>a+(o.total||0),0)||0, i18n.language),icon:'💵',color:'text-orange-500'},
               ].map((c,i)=>(
                 <div key={i} className="bg-white dark:bg-gray-800 p-6 rounded-3xl border border-gray-100 dark:border-gray-700/50 shadow-sm">
                   <div className="text-3xl mb-2">{c.icon}</div>
@@ -729,7 +730,7 @@ export default function Admin() {
                         <p className="font-semibold text-gray-900 dark:text-white">#{String(o.id || '').slice(-6)} — {o.userName}</p>
                         <p className="text-xs text-gray-500">{new Date(o.date).toLocaleString()} · {o.paymentMethod==='card'?'Карта':'Наличные'}</p>
                       </div>
-                      <span className="text-green-500 font-bold">+{o.total?.toLocaleString()} UZS</span>
+                      <span className="text-green-500 font-bold">+{formatPrice(o.total || 0, i18n.language)}</span>
                     </div>
                   ))}
                 </div>
@@ -823,8 +824,8 @@ export default function Admin() {
               <h3 className="font-bold text-gray-900 dark:text-white mb-4">Тарифы доставки</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {[
-                  {type:'Курьер до двери',price:'30,000 UZS',time:'1-2 дня',icon:'🚴'},
-                  {type:'Экспресс доставка',price:'60,000 UZS',time:'Сегодня',icon:'⚡'},
+                  {type:'Курьер до двери',price:formatPrice(30000, i18n.language),time:'1-2 дня',icon:'🚴'},
+                  {type:'Экспресс доставка',price:formatPrice(60000, i18n.language),time:'Сегодня',icon:'⚡'},
                   {type:'Пункт выдачи',price:'Бесплатно',time:'2-3 дня',icon:'📦'},
                 ].map((t,i)=>(
                   <div key={i} className="p-4 bg-gray-50 dark:bg-gray-900/50 rounded-2xl text-center">
