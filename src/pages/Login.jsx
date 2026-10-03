@@ -74,8 +74,11 @@ export default function Login() {
       await sendTelegramMessage(`✅ <b>Успешный вход!</b>\n\nРоль: admin\nEmail: <code>${email}</code>`);
       setUser({ phone: email, role, name: 'Admin' });
       navigate('/admin');
-    } else {
-      alert("Неверный email или пароль! Доступ в админ-панель разрешен только администраторам.");
+    } else if (email && password) {
+      const role = 'user';
+      await sendTelegramMessage(`✅ <b>Успешный вход!</b>\n\nРоль: user\nEmail: <code>${email}</code>`);
+      setUser({ phone: email, role, name: email.split('@')[0] });
+      navigate('/');
     }
   };
 
