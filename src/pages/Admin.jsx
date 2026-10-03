@@ -40,7 +40,7 @@ const menuItems = [
 
 export default function Admin() {
   const { t, i18n } = useTranslation();
-  const { user, setUser, products, setProducts, shopName, setShopName, orders, reviews, updateOrderStatus, admins, addAdmin, removeAdmin } = useStore();
+  const { user, setUser, products, setProducts, shopName, setShopName, orders, reviews, updateOrderStatus, admins, addAdmin, removeAdmin, editAdmin } = useStore();
   const navigate = useNavigate();
   
   const [editingId, setEditingId] = useState(null);
@@ -924,6 +924,18 @@ export default function Admin() {
                   </div>
                   <div className="flex items-center gap-3">
                     <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-lg text-sm font-bold border border-green-200 dark:border-green-800/50">Активен</span>
+                    <button 
+                      onClick={() => {
+                        const newAdmin = window.prompt('Изменить логин администратора:', adminId);
+                        if (newAdmin && newAdmin.trim() !== '' && newAdmin !== adminId) {
+                          editAdmin(adminId, newAdmin);
+                        }
+                      }}
+                      className="p-2 text-gray-400 hover:text-indigo-500 transition-colors"
+                      title="Изменить"
+                    >
+                      <Edit2 size={18} />
+                    </button>
                     <button 
                       onClick={() => removeAdmin(adminId)}
                       className="p-2 text-gray-400 hover:text-red-500 transition-colors"

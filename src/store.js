@@ -248,4 +248,11 @@ export const useStore = create((set) => ({
     localStorage.setItem('admins', JSON.stringify(updated));
     return { admins: updated };
   }),
+  editAdmin: (oldEmail, newEmail) => set((state) => {
+    const updated = state.admins.map(a => 
+      a === oldEmail.toLowerCase().trim() ? newEmail.toLowerCase().trim() : a
+    );
+    localStorage.setItem('admins', JSON.stringify(updated));
+    return { admins: updated };
+  }),
 }));
