@@ -22,20 +22,20 @@ const mockData = [
 ];
 
 const menuItems = [
-  { id: 'analytics', label: '📊 Аналитика', icon: BarChart2 },
-  { id: 'products', label: '👟 Товары', icon: Package },
-  { id: 'orders', label: '🛍️ Заказы', icon: ShoppingCart },
-  { id: 'customers', label: '👥 Клиенты', icon: Users },
-  { id: 'inventory', label: '📦 Склад', icon: Archive },
-  { id: 'categories', label: '🏷️ Категории', icon: Tags },
-  { id: 'payments', label: '💳 Платежи', icon: CreditCard },
-  { id: 'promocodes', label: '🎟️ Промокоды', icon: Ticket },
-  { id: 'reviews', label: '⭐ Отзывы', icon: Star },
-  { id: 'delivery', label: '🚚 Доставка', icon: Truck },
-  { id: 'favorites', label: '❤️ Избранное', icon: Heart },
-  { id: 'notifications', label: '🔔 Уведомления', icon: Bell },
-  { id: 'admins', label: '👤 Администраторы', icon: Shield },
-  { id: 'settings', label: '⚙️ Настройки', icon: Settings },
+  { id: 'analytics', label: 'admin_analytics', icon: BarChart2 },
+  { id: 'products', label: 'admin_products', icon: Package },
+  { id: 'orders', label: 'admin_orders', icon: ShoppingCart },
+  { id: 'customers', label: 'admin_customers', icon: Users },
+  { id: 'inventory', label: 'admin_inventory', icon: Archive },
+  { id: 'categories', label: 'admin_categories', icon: Tags },
+  { id: 'payments', label: 'admin_payments', icon: CreditCard },
+  { id: 'promocodes', label: 'admin_promocodes', icon: Ticket },
+  { id: 'reviews', label: 'admin_reviews', icon: Star },
+  { id: 'delivery', label: 'admin_delivery', icon: Truck },
+  { id: 'favorites', label: 'admin_favorites', icon: Heart },
+  { id: 'notifications', label: 'admin_notifications', icon: Bell },
+  { id: 'admins', label: 'admin_admins', icon: Shield },
+  { id: 'settings', label: 'admin_settings', icon: Settings },
 ];
 
 export default function Admin() {
@@ -133,7 +133,7 @@ export default function Admin() {
                 className={`flex items-center gap-4 px-4 py-3 rounded-2xl font-semibold transition-all text-left ${isActive ? 'bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 shadow-sm' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700/50'}`}
               >
                 <Icon size={20} className={isActive ? 'text-indigo-600 dark:text-indigo-400' : ''} />
-                <span className="truncate">{item.label.replace(/^[^\s]+\s/, '')}</span>
+                <span className="truncate">{t(item.label).replace(/^[^\s]+\s/, '')}</span>
               </button>
             )
           })}
