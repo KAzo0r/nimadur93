@@ -5,7 +5,7 @@ import ProductCard from '../components/ProductCard';
 import { Search } from 'lucide-react';
 
 export default function Catalog() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { products } = useStore();
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('all');
@@ -13,9 +13,15 @@ export default function Catalog() {
 
   const safeProducts = Array.isArray(products) ? products : [];
   
+  const getProductName = (p) => {
+    if (!p || !p.name) return '';
+    if (typeof p.name === 'string') return p.name;
+    return p.name[i18n.language] || p.name['ru'] || '';
+  };
+
   let filtered = safeProducts.filter(p => {
     if (!p) return false;
-    const nameStr = p.name || '';
+    const nameStr = getProductName(p);
     const matchesSearch = nameStr.toLowerCase().includes(search.toLowerCase());
     const matchesCategory = category === 'all' || p.category === category;
     return matchesSearch && matchesCategory;
@@ -24,8 +30,8 @@ export default function Catalog() {
   filtered.sort((a, b) => {
     if (sort === 'price_asc') return (a.price || 0) - (b.price || 0);
     if (sort === 'price_desc') return (b.price || 0) - (a.price || 0);
-    const nameA = a.name || '';
-    const nameB = b.name || '';
+    const nameA = getProductName(a);
+    const nameB = getProductName(b);
     return nameA.localeCompare(nameB);
   });
 

@@ -193,7 +193,11 @@ export default function Reviews() {
                     <h3 className="font-bold text-gray-900 dark:text-white">{review.userName}</h3>
                     {review.productId && (
                       <p className="text-xs text-indigo-500">
-                        {products.find(p => String(p.id) === String(review.productId))?.name || `Товар #${review.productId}`}
+                        {(() => {
+                          const prod = products.find(p => String(p.id) === String(review.productId));
+                          if (!prod) return `Товар #${review.productId}`;
+                          return typeof prod.name === 'object' ? (prod.name[i18n.language] || prod.name.ru) : prod.name;
+                        })()}
                       </p>
                     )}
                   </div>

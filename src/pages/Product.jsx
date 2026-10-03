@@ -61,7 +61,9 @@ export default function Product() {
                 <span className="px-3 py-1 bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400 rounded-lg text-xs font-bold uppercase tracking-wider">{product.category}</span>
                 <span className="px-3 py-1 bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300 rounded-lg text-xs font-bold uppercase tracking-wider">{product.brand}</span>
               </div>
-              <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white mb-2">{product.name[i18n.language] || product.name['ru']}</h1>
+              <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white mb-2">
+                {typeof product.name === 'object' ? (product.name[i18n.language] || product.name['ru']) : product.name}
+              </h1>
               <div className="flex items-center gap-4 text-sm">
                 <div className="flex items-center gap-1 text-yellow-500 font-bold">
                   <Star size={16} fill="currentColor" />
@@ -78,7 +80,9 @@ export default function Product() {
               </div>
             </div>
 
-            <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">{product.desc[i18n.language] || product.desc['ru']}</p>
+            <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
+              {typeof product.desc === 'object' ? (product.desc[i18n.language] || product.desc['ru']) : product.desc}
+            </p>
 
             <div className="text-4xl font-black text-indigo-600 dark:text-indigo-400">
               {product.price.toLocaleString()} UZS
