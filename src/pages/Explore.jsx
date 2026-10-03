@@ -80,7 +80,7 @@ export default function Explore() {
   const navigate = useNavigate();
 
   const filters = ['Все', '🔥 Распродажа', '📱 Новинки', '🎮 Геймеры', '👟 Стиль', '🎧 Аудио', '💡 Советы'];
-  const filtered = activeFilter === 'Все' ? NEWS : NEWS.filter(n => n.category === activeFilter);
+  const filtered = activeFilter === 'Все' ? NEWS : NEWS.filter(n => (typeof n.category === 'object' ? n.category.ru : n.category) === activeFilter);
 
   return (
     <div className="space-y-10 animate-fade-in">
