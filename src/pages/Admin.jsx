@@ -49,6 +49,17 @@ export default function Admin() {
   });
   const [activeTab, setActiveTab] = useState('analytics');
 
+  const [notifications, setNotifications] = useState([
+    { id: 1, title: 'Новый заказ #10234', desc: 'Заказ на сумму 13,500,000 UZS ожидает обработки.', type: 'order', time: '10 минут назад', isNew: true },
+    { id: 2, title: 'Новый отзыв', desc: 'Пользователь оставил 5 звезд к товару "iPhone 15 Pro Max".', type: 'review', time: '1 час назад', isNew: true },
+    { id: 3, title: 'Низкий остаток на складе', desc: 'Товар "AirPods Pro 2" заканчивается (осталось 2 шт.)', type: 'alert', time: '3 часа назад', isNew: false },
+    { id: 4, title: 'Регистрация пользователя', desc: 'Новый пользователь alex@mail.ru успешно зарегистрировался.', type: 'user', time: 'Вчера', isNew: false },
+  ]);
+
+  const markAllAsRead = () => {
+    setNotifications(notifications.map(n => ({ ...n, isNew: false })));
+  };
+
   useEffect(() => {
     if (!user) navigate('/login');
   }, [user, navigate]);
@@ -147,9 +158,11 @@ export default function Admin() {
           </div>
           
           <div className="flex items-center gap-6 ml-auto">
-            <button className="relative p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors">
+            <button onClick={() => setActiveTab('notifications')} className="relative p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors">
               <Bell size={24} />
-              <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white dark:border-gray-800"></span>
+              {notifications.some(n => n.isNew) && (
+                <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white dark:border-gray-800"></span>
+              )}
             </button>
             <div className="flex items-center gap-3 border-l border-gray-200 dark:border-gray-700 pl-6">
               <div className="text-right hidden sm:block">
@@ -834,17 +847,12 @@ export default function Admin() {
             <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-sm border border-gray-100 dark:border-gray-700/50">
               <div className="flex items-center justify-between mb-6">
                 <h3 className="font-bold text-lg text-gray-900 dark:text-white">Последние события</h3>
-                <button className="text-indigo-500 hover:underline text-sm font-medium">Отметить все как прочитанные</button>
+                <button onClick={markAllAsRead} className="text-indigo-500 hover:underline text-sm font-medium">Отметить все как прочитанные</button>
               </div>
 
               <div className="space-y-4">
-                {[
-                  { title: 'Новый заказ #10234', desc: 'Заказ на сумму 13,500,000 UZS ожидает обработки.', type: 'order', time: '10 минут назад', isNew: true },
-                  { title: 'Новый отзыв', desc: 'Пользователь оставил 5 звезд к товару "iPhone 15 Pro Max".', type: 'review', time: '1 час назад', isNew: true },
-                  { title: 'Низкий остаток на складе', desc: 'Товар "AirPods Pro 2" заканчивается (осталось 2 шт.)', type: 'alert', time: '3 часа назад', isNew: false },
-                  { title: 'Регистрация пользователя', desc: 'Новый пользователь alex@mail.ru успешно зарегистрировался.', type: 'user', time: 'Вчера', isNew: false },
-                ].map((n, i) => (
-                  <div key={i} className={`p-4 rounded-2xl flex gap-4 items-start transition-colors ${n.isNew ? 'bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800' : 'bg-gray-50 dark:bg-gray-900/50'}`}>
+                {notifications.map((n) => (
+                  <div key={n.id} className={`p-4 rounded-2xl flex gap-4 items-start transition-colors ${n.isNew ? 'bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800' : 'bg-gray-50 dark:bg-gray-900/50'}`}>
                     <div className={`p-3 rounded-xl shrink-0 ${
                       n.type === 'order' ? 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400' :
                       n.type === 'review' ? 'bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-400' :
