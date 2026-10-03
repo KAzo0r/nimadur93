@@ -332,18 +332,18 @@ export default function Admin() {
 
         {activeTab === 'products' && (
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 animate-slide-up">
-            <div className="xl:col-span-1 bg-white dark:bg-gray-800 p-6 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700/50 h-fit sticky top-24 max-h-[85vh] overflow-y-auto custom-scrollbar">
+            <div className="xl:col-span-1 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl p-6 rounded-3xl shadow-xl border border-gray-100 dark:border-gray-700/50 h-fit sticky top-24 max-h-[85vh] overflow-y-auto custom-scrollbar overflow-x-hidden">
               <h2 className="text-xl font-bold mb-6 text-gray-900 dark:text-white">{editingId ? 'Редактировать модель' : 'Добавить кроссовки'}</h2>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="text-xs text-gray-500 dark:text-gray-400 ml-2">Название (Модель)</label>
-                  <input type="text" placeholder="Air Jordan 1 Retro" required value={form.name} onChange={e => setForm({...form, name: e.target.value})} className="w-full mt-1 px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl outline-none focus:border-indigo-500 transition-colors text-gray-900 dark:text-white" />
+                  <label className="text-xs font-bold text-gray-600 dark:text-gray-300 ml-1 mb-1.5 block uppercase tracking-wider">Модель</label>
+                  <input type="text" placeholder="Air Jordan 1 Retro" required value={form.name} onChange={e => setForm({...form, name: e.target.value})} className="w-full px-4 py-2.5 bg-gray-50/50 dark:bg-gray-900/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/80 rounded-xl outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 hover:border-gray-300 dark:hover:border-gray-600" />
                 </div>
                 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="text-xs text-gray-500 dark:text-gray-400 ml-2">Бренд</label>
-                    <select value={form.brand} onChange={e => setForm({...form, brand: e.target.value})} className="w-full mt-1 px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl outline-none focus:border-indigo-500 transition-colors text-gray-900 dark:text-white">
+                    <label className="text-xs font-bold text-gray-600 dark:text-gray-300 ml-1 mb-1.5 block uppercase tracking-wider">Бренд</label>
+                    <select value={form.brand} onChange={e => setForm({...form, brand: e.target.value})} className="w-full px-4 py-2.5 bg-gray-50/50 dark:bg-gray-900/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/80 rounded-xl outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all text-gray-900 dark:text-white hover:border-gray-300 dark:hover:border-gray-600">
                       <option value="Nike">Nike</option>
                       <option value="Adidas">Adidas</option>
                       <option value="New Balance">New Balance</option>
@@ -353,8 +353,8 @@ export default function Admin() {
                     </select>
                   </div>
                   <div>
-                    <label className="text-xs text-gray-500 dark:text-gray-400 ml-2">Категория</label>
-                    <select value={form.category} onChange={e => setForm({...form, category: e.target.value})} className="w-full mt-1 px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl outline-none focus:border-indigo-500 transition-colors text-gray-900 dark:text-white">
+                    <label className="text-xs font-bold text-gray-600 dark:text-gray-300 ml-1 mb-1.5 block uppercase tracking-wider">Категория</label>
+                    <select value={form.category} onChange={e => setForm({...form, category: e.target.value})} className="w-full px-4 py-2.5 bg-gray-50/50 dark:bg-gray-900/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/80 rounded-xl outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all text-gray-900 dark:text-white hover:border-gray-300 dark:hover:border-gray-600">
                       <option value="Кроссовки">Кроссовки</option>
                       <option value="Кеды">Кеды</option>
                       <option value="Спортивная обувь">Спорт</option>
@@ -365,34 +365,34 @@ export default function Admin() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="text-xs text-gray-500 dark:text-gray-400 ml-2">Цена (UZS)</label>
-                    <input type="number" placeholder="1500000" required value={form.price} onChange={e => setForm({...form, price: e.target.value})} className="w-full mt-1 px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl outline-none focus:border-indigo-500 transition-colors text-gray-900 dark:text-white" />
+                    <label className="text-xs font-bold text-gray-600 dark:text-gray-300 ml-1 mb-1.5 block uppercase tracking-wider">Цена</label>
+                    <input type="number" placeholder="1500000" required value={form.price} onChange={e => setForm({...form, price: e.target.value})} className="w-full px-4 py-2.5 bg-gray-50/50 dark:bg-gray-900/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/80 rounded-xl outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 hover:border-gray-300 dark:hover:border-gray-600" />
                   </div>
                   <div>
-                    <label className="text-xs text-gray-500 dark:text-gray-400 ml-2">Остаток на складе</label>
-                    <input type="number" placeholder="25" required value={form.stock} onChange={e => setForm({...form, stock: e.target.value})} className="w-full mt-1 px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl outline-none focus:border-indigo-500 transition-colors text-gray-900 dark:text-white" />
+                    <label className="text-xs font-bold text-gray-600 dark:text-gray-300 ml-1 mb-1.5 block uppercase tracking-wider">В наличии</label>
+                    <input type="number" placeholder="25" required value={form.stock} onChange={e => setForm({...form, stock: e.target.value})} className="w-full px-4 py-2.5 bg-gray-50/50 dark:bg-gray-900/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/80 rounded-xl outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 hover:border-gray-300 dark:hover:border-gray-600" />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="text-xs text-gray-500 dark:text-gray-400 ml-2">Размеры (ч/з запятую)</label>
-                    <input type="text" placeholder="39, 40, 41, 42" value={form.sizes} onChange={e => setForm({...form, sizes: e.target.value})} className="w-full mt-1 px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl outline-none focus:border-indigo-500 transition-colors text-gray-900 dark:text-white" />
+                    <label className="text-xs font-bold text-gray-600 dark:text-gray-300 ml-1 mb-1.5 block uppercase tracking-wider">Размеры</label>
+                    <input type="text" placeholder="39, 40, 41, 42" value={form.sizes} onChange={e => setForm({...form, sizes: e.target.value})} className="w-full px-4 py-2.5 bg-gray-50/50 dark:bg-gray-900/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/80 rounded-xl outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 hover:border-gray-300 dark:hover:border-gray-600" />
                   </div>
                   <div>
-                    <label className="text-xs text-gray-500 dark:text-gray-400 ml-2">Цвета</label>
-                    <input type="text" placeholder="Белый, Черный" value={form.colors} onChange={e => setForm({...form, colors: e.target.value})} className="w-full mt-1 px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl outline-none focus:border-indigo-500 transition-colors text-gray-900 dark:text-white" />
+                    <label className="text-xs font-bold text-gray-600 dark:text-gray-300 ml-1 mb-1.5 block uppercase tracking-wider">Цвета</label>
+                    <input type="text" placeholder="Белый, Черный" value={form.colors} onChange={e => setForm({...form, colors: e.target.value})} className="w-full px-4 py-2.5 bg-gray-50/50 dark:bg-gray-900/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/80 rounded-xl outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 hover:border-gray-300 dark:hover:border-gray-600" />
                   </div>
                 </div>
 
                 <div>
-                  <label className="text-xs text-gray-500 dark:text-gray-400 ml-2">Ссылка на фото (URL)</label>
-                  <input type="url" placeholder="https://..." required value={form.image} onChange={e => setForm({...form, image: e.target.value})} className="w-full mt-1 px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl outline-none focus:border-indigo-500 transition-colors text-gray-900 dark:text-white" />
+                  <label className="text-xs font-bold text-gray-600 dark:text-gray-300 ml-1 mb-1.5 block uppercase tracking-wider">Фото (URL)</label>
+                  <input type="url" placeholder="https://..." required value={form.image} onChange={e => setForm({...form, image: e.target.value})} className="w-full px-4 py-2.5 bg-gray-50/50 dark:bg-gray-900/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/80 rounded-xl outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 hover:border-gray-300 dark:hover:border-gray-600" />
                 </div>
                 
                 <div>
-                  <label className="text-xs text-gray-500 dark:text-gray-400 ml-2">Описание</label>
-                  <textarea placeholder="Опишите модель, материалы, технологии..." required value={form.desc} onChange={e => setForm({...form, desc: e.target.value})} className="w-full mt-1 px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl outline-none focus:border-indigo-500 h-24 resize-none transition-colors text-gray-900 dark:text-white"></textarea>
+                  <label className="text-xs font-bold text-gray-600 dark:text-gray-300 ml-1 mb-1.5 block uppercase tracking-wider">Описание</label>
+                  <textarea placeholder="Опишите модель, материалы, технологии..." required value={form.desc} onChange={e => setForm({...form, desc: e.target.value})} className="w-full px-4 py-2.5 bg-gray-50/50 dark:bg-gray-900/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/80 rounded-xl outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 h-24 resize-none transition-all text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 hover:border-gray-300 dark:hover:border-gray-600 custom-scrollbar"></textarea>
                 </div>
                 
                 <button type="submit" className="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold transition-transform hover:scale-[1.02] flex items-center justify-center gap-2">
