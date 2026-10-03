@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useStore } from '../store';
 import { Trash2, Plus, Minus, CheckCircle, MapPin, ChevronDown, ChevronRight } from 'lucide-react';
 import { sendTelegramMessage, sendTelegramOrder } from '../utils/telegram';
+import { formatPrice } from '../utils/currency';
 
 const PICKUP_POINTS = {
   'Ташкент': [
@@ -78,12 +79,12 @@ export default function Cart() {
     const pickupInfo = selectedPoint ? `${selectedCity} — ${selectedPoint.name}, ${selectedPoint.address}` : '';
     let orderText = `🛒 <b>Новый заказ!</b>\n\n`;
     cart.forEach((item, i) => {
-      orderText += `${i + 1}. ${item.name['ru'] || item.name} — ${item.qty} шт. × ${item.price.toLocaleString()} UZS\n`;
+      orderText += `${i + 1}. ${item.name['ru'] || item.name} — ${item.qty} шт. × ${formatPrice(item.price, i18n.language)}\n`;
     });
     orderText += `\n<b>Оплата:</b> ${paymentMethod === 'card' ? '💳 Карта' : '💵 Наличные'}\n`;
-    orderText += `<b>Доставка:</b> ${deliveryMethod === 'delivery' ? '🚚 До двери (+30 000 UZS)' : `📦 Пункт выдачи — ${pickupInfo}`}\n`;
+    orderText += `<b>Доставка:</b> ${deliveryMethod === 'delivery' ? `🚚 До двери (+${formatPrice(30000, i18n.language)})` : `📦 Пункт выдачи — ${pickupInfo}`}\n`;
     orderText += `<b>Скидка:</b> ${Math.round(discount * 100)}%\n`;
-    orderText += `<b>Итого:</b> ${total.toLocaleString()} UZS`;
+    orderText += `<b>Итого:</b> ${formatPrice(total, i18n.language)}`;
 
     const images = cart.map(item => item.image).filter(Boolean);
     await sendTelegramOrder(orderText, images);
@@ -124,11 +125,11 @@ export default function Cart() {
               <div className="flex-1 text-center sm:text-left">
                 <h3 className="font-bold text-lg text-gray-900 dark:text-white line-clamp-2">{item.name[i18n.language] || item.name['ru']}</h3>
                 <div className="flex items-center gap-2 mt-1 justify-center sm:justify-start">
-                  <p className="text-indigo-500 font-bold">{item.price.toLocaleString()} UZS</p>
+                  <p className="text-indigo-500 font-bold">{formatPrice(item.price, i18n.language)}</p>
                   {item.discount && (
                     <>
                       <span className="text-xs text-gray-400 line-through decoration-red-500/50">
-                        {Math.round(item.price / (1 - item.discount / 100)).toLocaleString()} UZS
+                        {formatPrice(Math.round(item.price / (1 - item.discount / 100)), i18n.language)}
                       </span>
                       <span className="text-[10px] font-bold px-1.5 py-0.5 bg-red-500 text-white rounded-md">
                         -{item.discount}%
@@ -164,18 +165,18 @@ export default function Cart() {
           <div className="space-y-2 text-base">
             <div className="flex justify-between">
               <span className="text-gray-500">Подытог:</span>
-              <span className="font-medium text-gray-900 dark:text-white">{subtotal.toLocaleString()} UZS</span>
+              <span className="font-medium text-gray-900 dark:text-white">{formatPrice(subtotal, i18n.language)}</span>
             </div>
             {discount > 0 && (
               <div className="flex justify-between text-green-500 font-medium">
                 <span>Скидка -{Math.round(discount * 100)}%:</span>
-                <span>-{Math.round(subtotal * discount).toLocaleString()} UZS</span>
+                <span>-{formatPrice(Math.round(subtotal * discount), i18n.language)}</span>
               </div>
             )}
             {deliveryMethod === 'delivery' && (
               <div className="flex justify-between text-gray-500">
                 <span>Доставка:</span>
-                <span>+30 000 UZS</span>
+                <span>+{formatPrice(30000, i18n.language)}</span>
               </div>
             )}
             {deliveryMethod === 'pickup' && (
@@ -186,7 +187,7 @@ export default function Cart() {
             )}
             <div className="flex justify-between text-2xl font-bold pt-3 border-t border-gray-100 dark:border-gray-700">
               <span className="text-gray-900 dark:text-white">{t('total')}:</span>
-              <span className="text-indigo-500">{total.toLocaleString()} UZS</span>
+              <span className="text-indigo-500">{formatPrice(total, i18n.language)}</span>
             </div>
           </div>
 

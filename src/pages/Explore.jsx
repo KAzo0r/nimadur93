@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useStore } from '../store';
 import { TrendingUp, Percent, Clock, Star, Zap, Tag, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { formatPrice } from '../utils/currency';
 
 const NEWS = [
   {
@@ -126,9 +127,9 @@ export default function Explore() {
                 <div className="p-4">
                   <p className="font-semibold text-gray-900 dark:text-white text-sm line-clamp-2 mb-2">{typeof p.name === 'object' ? p.name[i18n.language] || p.name.ru : p.name}</p>
                   <div className="flex items-center gap-2">
-                    <span className="font-black text-indigo-600 dark:text-indigo-400">{p.price.toLocaleString()} UZS</span>
+                    <span className="font-black text-indigo-600 dark:text-indigo-400">{formatPrice(p.price, i18n.language)}</span>
                   </div>
-                  <p className="text-xs text-gray-400 line-through">{oldPrice.toLocaleString()} UZS</p>
+                  <p className="text-xs text-gray-400 line-through">{formatPrice(oldPrice, i18n.language)}</p>
                 </div>
               </div>
             );

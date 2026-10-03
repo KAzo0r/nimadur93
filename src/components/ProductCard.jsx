@@ -2,6 +2,7 @@ import { Heart, ShoppingCart, Star } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useStore } from '../store';
 import { useNavigate } from 'react-router-dom';
+import { formatPrice } from '../utils/currency';
 
 export default function ProductCard({ product }) {
   const { t, i18n } = useTranslation();
@@ -38,7 +39,7 @@ export default function ProductCard({ product }) {
             {typeof product.name === 'object' ? (product.name[i18n.language] || product.name['ru']) : product.name}
           </h3>
           <span className="font-bold text-indigo-500 whitespace-nowrap bg-indigo-50 dark:bg-indigo-900/30 px-2 py-1 rounded-lg">
-            {product.price.toLocaleString()} UZS
+            {formatPrice(product.price, i18n.language)}
           </span>
         </div>
         {productReviews.length > 0 && (

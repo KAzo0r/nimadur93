@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useStore } from '../store';
 import { ShoppingCart, Heart, ArrowLeft, Star, Truck, ShieldCheck, Zap } from 'lucide-react';
+import { formatPrice } from '../utils/currency';
 
 export default function Product() {
   const { id } = useParams();
@@ -85,7 +86,7 @@ export default function Product() {
             </p>
 
             <div className="text-4xl font-black text-indigo-600 dark:text-indigo-400">
-              {product.price.toLocaleString()} UZS
+              {formatPrice(product.price, i18n.language)}
             </div>
 
             {/* Colors */}
