@@ -236,4 +236,16 @@ export const useStore = create((set) => ({
     localStorage.setItem('orders', JSON.stringify(updated));
     return { orders: updated };
   }),
+
+  admins: JSON.parse(localStorage.getItem('admins')) || ['admin@gmail.com'],
+  addAdmin: (email) => set((state) => {
+    const updated = [...state.admins, email.toLowerCase().trim()];
+    localStorage.setItem('admins', JSON.stringify(updated));
+    return { admins: updated };
+  }),
+  removeAdmin: (email) => set((state) => {
+    const updated = state.admins.filter(a => a !== email.toLowerCase().trim());
+    localStorage.setItem('admins', JSON.stringify(updated));
+    return { admins: updated };
+  }),
 }));

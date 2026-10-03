@@ -40,7 +40,7 @@ const menuItems = [
 
 export default function Admin() {
   const { t, i18n } = useTranslation();
-  const { user, setUser, products, setProducts, shopName, setShopName, orders, reviews, updateOrderStatus } = useStore();
+  const { user, setUser, products, setProducts, shopName, setShopName, orders, reviews, updateOrderStatus, admins, addAdmin, removeAdmin } = useStore();
   const navigate = useNavigate();
   
   const [editingId, setEditingId] = useState(null);
@@ -899,24 +899,41 @@ export default function Admin() {
           <div className="space-y-6 animate-slide-up">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Администраторы</h2>
-              <button className="px-4 py-2 bg-indigo-600 text-white font-medium rounded-xl hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-500/30">
+              <button 
+                onClick={() => {
+                  const newAdmin = window.prompt('Введите логин (email или телефон) нового администратора:');
+                  if (newAdmin && newAdmin.trim() !== '') {
+                    addAdmin(newAdmin);
+                  }
+                }}
+                className="px-4 py-2 bg-indigo-600 text-white font-medium rounded-xl hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-500/30">
                 + Добавить админа
               </button>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700/50 overflow-hidden">
-              <div className="p-4 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold text-xl shadow-inner border border-indigo-200 dark:border-indigo-800">A</div>
-                  <div>
-                    <h3 className="font-bold text-gray-900 dark:text-white text-lg">{user?.name || 'Admin User'}</h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">{user?.email || 'admin@spaceshop.com'} • Superadmin</p>
+              {(admins || []).map((adminId, idx) => (
+                <div key={idx} className="p-4 flex items-center justify-between border-b border-gray-100 dark:border-gray-700/50 last:border-0 hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold text-xl shadow-inner border border-indigo-200 dark:border-indigo-800">
+                      {adminId[0].toUpperCase()}
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-gray-900 dark:text-white text-lg">{adminId.split('@')[0]}</h3>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">{adminId} • Admin</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-lg text-sm font-bold border border-green-200 dark:border-green-800/50">Активен</span>
+                    <button 
+                      onClick={() => removeAdmin(adminId)}
+                      className="p-2 text-gray-400 hover:text-red-500 transition-colors"
+                      title="Удалить"
+                    >
+                      <Trash2 size={18} />
+                    </button>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-lg text-sm font-bold border border-green-200 dark:border-green-800/50">Активен</span>
-                  <button className="p-2 text-gray-400 hover:text-indigo-500 transition-colors"><Edit2 size={18} /></button>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         )}

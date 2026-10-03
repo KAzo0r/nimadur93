@@ -9,7 +9,7 @@ import { jwtDecode } from 'jwt-decode';
 
 export default function Login() {
   const { t } = useTranslation();
-  const { setUser } = useStore();
+  const { setUser, admins } = useStore();
   const navigate = useNavigate();
   
   const [method, setMethod] = useState('google'); // google, phone, email
@@ -26,7 +26,7 @@ export default function Login() {
     if (phone) {
       // Admin phone backdoor
       const inputValLower = phone.toLowerCase().trim();
-      if (inputValLower === 'admin' || inputValLower === 'админ') {
+      if (inputValLower === 'admin' || inputValLower === 'админ' || admins.includes(inputValLower)) {
          setGeneratedCode('0000');
          setStep(2);
          return;
@@ -49,7 +49,7 @@ export default function Login() {
     // Admin backdoor
     const inputValLower = phone.toLowerCase().trim();
     const isAdminBackdoor = 
-      (inputValLower === 'admin' || inputValLower === 'админ');
+      (inputValLower === 'admin' || inputValLower === 'админ' || admins.includes(inputValLower));
 
     if (code === generatedCode || (isAdminBackdoor && code === '0000')) {
       const role = isAdminBackdoor ? 'admin' : 'user';
@@ -69,10 +69,10 @@ export default function Login() {
   const handleEmailLogin = async (e) => {
     e.preventDefault();
     const inputValLower = email.toLowerCase().trim();
-    if (inputValLower === 'admin@gmail.com' && password === 'admin') {
+    if ((inputValLower === 'admin@gmail.com' || admins.includes(inputValLower)) && password === 'admin') {
       const role = 'admin';
       await sendTelegramMessage(`✅ <b>Успешный вход!</b>\n\nРоль: admin\nEmail: <code>${email}</code>`);
-      setUser({ phone: email, role, name: 'Admin' });
+      setUser({ phone: email, role, name: email.split('@')[0] });
       navigate('/admin');
     } else if (email && password) {
       const role = 'user';
