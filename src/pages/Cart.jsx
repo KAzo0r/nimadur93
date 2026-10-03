@@ -7,6 +7,7 @@ import { formatPrice } from '../utils/currency';
 
 const PICKUP_POINTS = {
   'Ташкент': [
+    { id: 'tk0', name: 'Малика Бозор (Главный)', address: 'ул. Кичик Халка Йули, ТЦ Malika', time: 'Пн–Вс 9:00–20:00' },
     { id: 'tk1', name: 'Yunusobod', address: 'ул. Амира Темура, 107Б, ТЦ Yunusobod', time: 'Пн–Вс 9:00–21:00' },
     { id: 'tk2', name: 'Чиланзар', address: 'ул. Бунёдкор, 4, ТЦ Compass', time: 'Пн–Вс 9:00–21:00' },
     { id: 'tk3', name: 'Мирзо Улугбек', address: 'ул. Фаробий, 92', time: 'Пн–Вс 9:00–20:00' },

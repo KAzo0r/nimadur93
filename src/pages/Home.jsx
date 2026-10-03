@@ -63,7 +63,7 @@ export default function Home() {
         <h2 className="text-3xl font-bold mb-6 text-center text-gray-900 dark:text-white">{t('location')}</h2>
         <div className="w-full h-[400px] rounded-2xl overflow-hidden shadow-inner">
           <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115132.86470005232!2d-80.64917658597374!3d28.5728722!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88e0a5ab3b4e6a05%3A0x86bd7e0f2249e917!2sKennedy%20Space%20Center!5e0!3m2!1sen!2sus!4v1711200000000!5m2!1sen!2sus" 
+            src="https://maps.google.com/maps?q=Malika%20Bazaar,%20Tashkent&t=&z=15&ie=UTF8&iwloc=&output=embed" 
             width="100%" 
             height="100%" 
             style={{border:0}} 
