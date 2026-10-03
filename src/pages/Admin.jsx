@@ -545,7 +545,7 @@ export default function Admin() {
                                     {item.discount && <span className="ml-1 text-red-500">(-{item.discount}%)</span>}
                                   </div>
                                   <div className="whitespace-nowrap font-medium">
-                                    {item.qty} шт x <span className="text-indigo-500">{item.price.toLocaleString()}</span>
+                                    {item.qty} шт x <span className="text-indigo-500">{formatPrice(item.price, i18n.language)}</span>
                                   </div>
                                 </li>
                               ))}
