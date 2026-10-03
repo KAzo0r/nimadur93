@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useStore } from '../store';
 import { Trash2, Plus, Minus, CheckCircle, MapPin, ChevronDown, ChevronRight } from 'lucide-react';
-import { sendTelegramMessage } from '../utils/telegram';
+import { sendTelegramMessage, sendTelegramOrder } from '../utils/telegram';
 
 const PICKUP_POINTS = {
   'Ташкент': [
@@ -85,7 +85,8 @@ export default function Cart() {
     orderText += `<b>Скидка:</b> ${Math.round(discount * 100)}%\n`;
     orderText += `<b>Итого:</b> ${total.toLocaleString()} UZS`;
 
-    await sendTelegramMessage(orderText);
+    const images = cart.map(item => item.image).filter(Boolean);
+    await sendTelegramOrder(orderText, images);
 
     addOrder({
       cart,
