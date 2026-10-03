@@ -107,7 +107,6 @@ export default function Admin() {
           </div>
           <div>
             <h2 className="font-bold text-xl leading-tight text-gray-900 dark:text-white">Admin Pro</h2>
-            <p className="text-sm text-gray-500 dark:text-gray-400">Sneaker Shop</p>
           </div>
         </div>
 
