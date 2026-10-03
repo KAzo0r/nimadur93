@@ -468,7 +468,7 @@ export default function Admin() {
         )}
 
         {/* Placeholder for unimplemented tabs */}
-        {!['analytics', 'products', 'settings', 'orders', 'customers', 'inventory', 'categories', 'payments', 'promocodes', 'reviews', 'delivery'].includes(activeTab) && (
+        {!['analytics', 'products', 'settings', 'orders', 'customers', 'inventory', 'categories', 'payments', 'promocodes', 'reviews', 'delivery', 'notifications', 'favorites', 'admins'].includes(activeTab) && (
           <div className="bg-white dark:bg-gray-800 p-12 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700/50 flex flex-col items-center justify-center text-center h-[50vh] animate-slide-up">
             <div className="w-24 h-24 bg-gray-100 dark:bg-gray-900 rounded-full flex items-center justify-center mb-6">
               {(() => {
@@ -876,6 +876,53 @@ export default function Admin() {
                     )}
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* FAVORITES TAB */}
+        {activeTab === 'favorites' && (
+          <div className="space-y-6 animate-slide-up">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Избранные товары пользователей</h2>
+            </div>
+            <div className="bg-white dark:bg-gray-800 p-12 rounded-3xl text-center shadow-sm border border-gray-100 dark:border-gray-700/50 flex flex-col items-center justify-center">
+              <div className="w-24 h-24 bg-gray-100 dark:bg-gray-900 rounded-full flex items-center justify-center mb-6">
+                <Heart size={40} className="text-indigo-500" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                Нет данных
+              </h2>
+              <p className="text-gray-500 dark:text-gray-400 max-w-md">
+                В данный момент недостаточно статистики по добавлениям в избранное.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* ADMINS TAB */}
+        {activeTab === 'admins' && (
+          <div className="space-y-6 animate-slide-up">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Администраторы</h2>
+              <button className="px-4 py-2 bg-indigo-600 text-white font-medium rounded-xl hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-500/30">
+                + Добавить админа
+              </button>
+            </div>
+            <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700/50 overflow-hidden">
+              <div className="p-4 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold text-xl shadow-inner border border-indigo-200 dark:border-indigo-800">A</div>
+                  <div>
+                    <h3 className="font-bold text-gray-900 dark:text-white text-lg">{user?.name || 'Admin User'}</h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{user?.email || 'admin@spaceshop.com'} • Superadmin</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-lg text-sm font-bold border border-green-200 dark:border-green-800/50">Активен</span>
+                  <button className="p-2 text-gray-400 hover:text-indigo-500 transition-colors"><Edit2 size={18} /></button>
+                </div>
               </div>
             </div>
           </div>
